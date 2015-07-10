@@ -1,0 +1,49 @@
+#!/bin/bash
+
+_WATCH=0
+_VERBOSE=0
+CMD=iojs
+
+function printUsage() {
+  echo ""
+  echo "-Usage------------------------------------------------------------------"
+  echo ""
+  echo "    $0 [-w] [--watch] [-v] [--verbose] [-h] [--help]"
+  echo ""
+  echo "-Examples---------------------------------------------------------------"
+  echo ""
+  echo "    Run server:						$0"
+  echo "    Run server in watch mode (reload on change):	$0 -w"  
+ }
+
+function log () {
+  if [[ $_VERBOSE -eq 1 ]]; then
+      echo "$@"
+  fi
+}
+
+if [[ $* == *-h* ]]; then  
+	printUsage
+	exit
+fi
+
+if [[ $* == *-v* ]]; then
+  _VERBOSE=1
+  log "Using verbose"
+fi
+
+if [[ $* == *-w* ]]; then
+  _WATCH=1
+  log "Watch mode enabled"
+fi
+
+if [[ $_WATCH -eq 1 ]]; then
+	if [[ -z $(node-dev -v) ]];then
+		log "node-dev not found, using iojs"
+	else 
+		CMD=node-dev
+	fi
+fi
+
+log "$CMD --harmony_arrow_functions server.js "
+$CMD --harmony_arrow_functions server.js 
