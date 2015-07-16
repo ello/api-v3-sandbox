@@ -2,7 +2,6 @@ package ello
 
 import (
 	"database/sql"
-	"log"
 	"time"
 
 	"gopkg.in/mgutz/dat.v1"
@@ -19,7 +18,7 @@ type User struct {
 var DB *runner.DB
 
 func init() {
-	db, err := sql.Open("postgres", "dbname=dfk5ej0olqe2rh host=ec2-54-243-192-203.compute-1.amazonaws.com port=5642 user=uf9tappjauoom password=p3jqdbbljvmoii510p374c4hu13 sslmode=require")
+	db, err := sql.Open("postgres", "dbname=dd8a20nnsdelm7 host=ec2-54-197-226-173.compute-1.amazonaws.com port=5432 user=uc7s3bo18tu0ap password=p8umei0b8m2mcod6oiemcegj9g1 sslmode=require")
 	if err != nil {
 		panic(err)
 	}
@@ -39,11 +38,10 @@ func init() {
 func Users() ([]*User, error) {
 
 	var users []*User
-	err := DB.SQL(`SELECT id, username, email FROM users limit 10 `).QueryStructs(&users)
+	err := DB.SQL(`SELECT id, username, email FROM users limit 100000`).QueryStructs(&users)
 	if err != nil {
 		return nil, err
 	}
-	log.Println(users)
 	return users, nil
 }
 
@@ -53,6 +51,5 @@ func UserForUsername(username string) (User, error) {
 	if err != nil {
 		return User{}, err
 	}
-	log.Println(user)
 	return user, nil
 }
