@@ -1,0 +1,26 @@
+# clojure:
+  # build: 'api-clojure'
+# go:
+  # build: 'api-go'
+grape:
+  build: 'api-grape'
+hapi:
+  build: 'api-hapi'
+railsapi:
+  build: 'api-rails-api'
+cassandra:
+  image: "mashape/cassandra"
+  expose:
+    - "9042"
+kong:
+  image: "mashape/kong"
+  ports:
+    - "8000:8000"
+    - "8001:8001"
+  links:
+    - "cassandra"
+    # - "clojure"
+    # - "go"
+    - "grape"
+    - "hapi"
+    - "railsapi"
