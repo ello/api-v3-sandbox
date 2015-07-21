@@ -35,10 +35,11 @@ func init() {
 	DB = runner.NewDB(db, "postgres")
 }
 
+// Returns Users
 func Users() ([]*User, error) {
 
 	var users []*User
-	err := DB.SQL(`SELECT id, username, email FROM users limit 100000`).QueryStructs(&users)
+	err := DB.SQL(`SELECT id, username, email FROM users limit 10000`).QueryStructs(&users)
 	if err != nil {
 		return nil, err
 	}
