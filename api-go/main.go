@@ -6,8 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ello/sandbox/api-go/ello"
-
+	"github.com/ello/sandbox/api-go/models"
 	"github.com/gorilla/mux"
 )
 
@@ -24,7 +23,7 @@ func usersHandler(res http.ResponseWriter, req *http.Request) {
 	log.Println("Responding to /users request")
 	log.Println(req.UserAgent())
 
-	users, _ := ello.Users()
+	users, _ := models.Users()
 
 	outgoingJSON, error := json.Marshal(users)
 
@@ -47,7 +46,7 @@ func userHandler(res http.ResponseWriter, req *http.Request) {
 		log.Fatal("Username must be provided")
 		http.Error(res, "Username must be provided", http.StatusNotAcceptable)
 	}
-	user, _ := ello.UserForUsername(username)
+	user, _ := models.UserForUsername(username)
 
 	outgoingJSON, error := json.Marshal(user)
 
