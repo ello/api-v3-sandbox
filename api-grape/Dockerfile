@@ -18,4 +18,4 @@ RUN bundle install
 ADD . $APP_HOME
 
 EXPOSE 9292
-CMD bundle exec rackup
+CMD bundle exec rackup -p 9292 --host 0.0.0.0

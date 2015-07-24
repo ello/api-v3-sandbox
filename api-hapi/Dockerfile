@@ -11,7 +11,7 @@ WORKDIR /usr/src/app
 RUN npm install hapi --save
 
 # Expose the node.js port to the Docker host.
-EXPOSE 3000
+EXPOSE 9292
 
 # This is the stock express binary to start the app.
 CMD [ "node", "server.js" ]

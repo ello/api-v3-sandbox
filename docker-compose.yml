@@ -3,11 +3,17 @@
 # go:
   # build: 'api-go'
 grape:
-  build: 'api-grape'
+  build: "api-grape"
+  ports:
+    - "9292:9292"
 hapi:
-  build: 'api-hapi'
+  build: "api-hapi"
+  expose:
+    - "9292"
 railsapi:
-  build: 'api-rails-api'
+  build: "api-rails-api"
+  expose:
+    - "9292"
 cassandra:
   image: "mashape/cassandra"
   expose:

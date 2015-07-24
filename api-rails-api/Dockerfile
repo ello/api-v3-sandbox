@@ -17,5 +17,4 @@ RUN bundle install
 
 ADD . $APP_HOME
 
-EXPOSE 3000
-CMD bundle exec rails server
+CMD bundle exec rails server -p 9292
